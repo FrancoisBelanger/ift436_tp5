@@ -1,28 +1,47 @@
-from boruvka import boruvka
-from kruskal import kruskal
+import random
 
-# connected oriented graph adjacency list
-cogal = {
-    'A': {'B': 1, 'C': 5, 'D': 3},
-    'B': {'A': 1, 'C': 4, 'D': 2},
-    'C': {'A': 5, 'B': 4, 'D': 1},
-    'D': {'A': 3, 'B': 2, 'C': 1}
-}
+# Maximum weight of an edge
+MAX_WEIGHT = 100
 
-# connected oriented graph edge list
-cogel = {
-    'vertices': ['A', 'B', 'C', 'D'],
-    'edges': {(1, 'A', 'B'),
-              (5, 'A', 'C'),
-              (3, 'A', 'D'),
-              (4, 'B', 'C'),
-              (2, 'B', 'D'),
-              (1, 'C', 'D')}
-}
+# Average degree of vertices
+AVG_DEG = 10
 
-# solution
-minimum_spanning_tree = {(1, 'A', 'B'),
-                         (2, 'B', 'D'),
-                         (1, 'C', 'D')}
+# Set random seed
+random.seed(5)
 
-assert boruvka(cogal) == kruskal(cogel) == minimum_spanning_tree
+def generate_graph(n):
+    # Graph structures that must be generated in parallel
+    adj_list = {}
+    edges = []
+
+    # Initialize adjacency lists for each vertex
+    for u in xrange(1, n+1):
+        adj_list[u] = {}
+
+    # Connect each vertex to its "next" vertex to make the graph connected
+    for u in xrange(1, n):
+        weight = random.randint(1, MAX_WEIGHT)
+        adj_list[u][u+1] = adj_list[u+1][u] = weight
+        edges.append((weight, u, u+1))
+
+    # Add random edges until graph is of correct size
+    num_edges = n * min(0.2*(n-1), AVG_DEG)
+    while len(edges) < num_edges:
+        # Generate a random edge
+        u = random.randint(1, n)
+        v = random.randint(1, n)
+
+        # Skip edge for any of these conditions:
+        #   - It is linking a vertex with itself
+        #   - It is linking a vertex with a vertex that has a "lower" value (to keep the graph undirected)
+        #   - It is linking a vertex with the "next" one
+        #   - It was already added
+        if u > v - 2 or v in adj_list[u]:
+            continue
+
+        # Add edge
+        weight = random.randint(1, MAX_WEIGHT)
+        adj_list[u][v] = adj_list[v][u] = weight
+        edges.append((weight, u, v))
+
+    return adj_list, {'vertices': range(1, n+1), 'edges': edges}

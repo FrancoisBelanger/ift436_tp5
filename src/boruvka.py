@@ -21,20 +21,20 @@ from disjoint_set import DisjointSet
 # 6     Add M.values to T
 # 7   Output: T is the minimum spanning tree of G.
 
-def boruvka(graph):
+def boruvka(adj_list):
     disj_set = DisjointSet()
 
-    for u in graph.keys():
+    for u in adj_list.keys():
         disj_set.make_set(u)
 
     min_span_tree = []
     while True:
         minima = {}
-        for u in graph.keys():
+        for u in adj_list.keys():
             root = disj_set.find(u)
-            for v in graph[u]:
-                if disj_set.find(v) != root and (root not in minima or graph[u][v] < minima[root][0]):
-                    minima[root] = (graph[u][v], u, v)
+            for v in adj_list[u]:
+                if disj_set.find(v) != root and (root not in minima or adj_list[u][v] < minima[root][0]):
+                    minima[root] = (adj_list[u][v], u, v)
 
         if len(minima) == 0:
             break

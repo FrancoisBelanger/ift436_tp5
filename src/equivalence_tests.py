@@ -14,7 +14,6 @@ def normalize_edge_list(edges):
             edges.remove(edge)
             edges.add((edge[0], edge[2], edge[1]))
 
-
 def run_equivalence_test(n, trace=False):
     """
     Compare all algorithms for the same input graph
@@ -40,7 +39,7 @@ def run_equivalence_test(n, trace=False):
 
     return success
 
-def run_equivalence_test_suite(max_graph_size, perc_increm):
+def run_equivalence_test_suite(max_graph_size, perc_increm=5):
     """
     Run a series of algorithm equivalence tests and prints an ugly chart depicting results
     :param max_graph_size: maximum input graph size
@@ -69,4 +68,3 @@ def run_equivalence_test_suite(max_graph_size, perc_increm):
         print
         perc -= perc_increm
 
-run_equivalence_test_suite(100, 5)

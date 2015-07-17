@@ -4,7 +4,7 @@ from disjoint_set import DisjointSet
 
 def kruskal(graph):
     disj_set = DisjointSet()
-    min_spanning_tree = set()
+    min_span_tree = []
 
     for u in graph['vertices']:
         disj_set.make_set(u)
@@ -16,6 +16,6 @@ def kruskal(graph):
         weight, u, v = edge
         if disj_set.find(u) != disj_set.find(v):
             disj_set.union(u, v)
-            min_spanning_tree.add(edge)
+            min_span_tree.append(edge)
 
-    return min_spanning_tree
+    return min_span_tree

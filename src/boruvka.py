@@ -27,7 +27,7 @@ def boruvka(graph):
     for u in graph.keys():
         disj_set.make_set(u)
 
-    min_spanning_tree = set()
+    min_span_tree = []
     while True:
         minima = {}
         for u in graph.keys():
@@ -41,6 +41,6 @@ def boruvka(graph):
 
         for edge in minima.items():
             if disj_set.union(edge[0], edge[1][2]):
-                min_spanning_tree.add(edge[1])
+                min_span_tree.append(edge[1])
 
-    return min_spanning_tree
+    return min_span_tree

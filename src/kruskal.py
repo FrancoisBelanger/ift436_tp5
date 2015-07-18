@@ -2,14 +2,14 @@ from disjoint_set import DisjointSet
 
 # adapted from https://github.com/israelst/Algorithms-Book--Python/blob/master/5-Greedy-algorithms/kruskal.py
 
-def kruskal(graph):
+def kruskal(vertex_list, edge_list):
     disj_set = DisjointSet()
     min_span_tree = []
 
-    for u in graph['vertices']:
+    for u in vertex_list:
         disj_set.make_set(u)
 
-    edges = list(graph['edges'])
+    edges = list(edge_list)
     edges.sort()
 
     for edge in edges:

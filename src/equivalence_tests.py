@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import timeit
+
 from boruvka import boruvka
 from kruskal import kruskal
 from prim import prim
@@ -23,7 +25,6 @@ def build_mst_edge_list(tree, adj_list):
     normalize_edge_list(edges)
     return edges
 
-
 def run_equivalence_test(n, trace=False):
     """
     Compare all algorithms for the same input graph
@@ -31,16 +32,36 @@ def run_equivalence_test(n, trace=False):
     :param trace:   print debug info is test failed
     :return True if test succeeds
     """
+
+    t = timeit.default_timer()
+
     adj_list, vertex_list, edge_list = generate_graph(n)
+
+    if trace:
+        print 'Generate graph: {}'.format(timeit.default_timer() - t)
+    t = timeit.default_timer()
 
     min_span_tree_boruvka = set(boruvka(adj_list))
     normalize_edge_list(min_span_tree_boruvka)
+
+    if trace:
+        print 'Boruvka: {}'.format(timeit.default_timer() - t)
+    t = timeit.default_timer()
+
     min_span_tree_kruskal = set(kruskal(vertex_list, edge_list))
-    min_span_tree_prim = build_mst_edge_list(prim(adj_list, vertex_list, 0), adj_list)
+
+    if trace:
+        print 'Kruskal: {}'.format(timeit.default_timer() - t)
+    t = timeit.default_timer()
+
+    min_span_tree_prim = build_mst_edge_list(prim(adj_list), adj_list)
+
+    if trace:
+        print 'Prim: {}'.format(timeit.default_timer() - t)
 
     success = min_span_tree_boruvka == min_span_tree_kruskal == min_span_tree_prim
 
-    if not success and trace:
+    if not success and trace and n < 100:
         print 'TEST FAILED:'
         print 'Adjacency list: {}'.format(adj_list)
         print 'Edge and vertex list: {}'.format(edge_list)
@@ -80,4 +101,4 @@ def run_equivalence_test_suite(max_graph_size, perc_increm=5):
         print
         perc -= perc_increm
 
-run_equivalence_test_suite(50)
+run_equivalence_test(1000000, True)

@@ -1,25 +1,6 @@
 from disjoint_set import DisjointSet
 
-# Original (pseudo code source: https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm)
-# 0   Input: A connected graph G whose edges have distinct weights
-# 1   Initialize a forest T to be a set of one-vertex trees, one for each vertex of the graph.
-# 2   While T has more than one component:
-# 3     For each component C of T:
-# 4       Begin with an empty set of edges S
-# 5       For each vertex v in C:
-# 6         Find the cheapest edge from v to a vertex outside of C, and add it to S
-# 7       Add the cheapest edge in S to T
-# 8   Output: T is the minimum spanning tree of G.
-
-# Adaptation
-# 0   Input: An connected oriented graph G whose edges have distinct weights
-# 1   Initialize a forest T to be a set of one-vertex trees, one for each vertex of the graph.
-# 2   While T has more than one component:
-# 3     Initialize a map <vertex,edge> M
-# 4     For each vertex u in G:
-# 5       M[find(u)] = Cheapest edge from u to a vertex outside of the component of u
-# 6     Add M.values to T
-# 7   Output: T is the minimum spanning tree of G.
+# adapted from https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm)
 
 def boruvka(adj_list):
     disj_set = DisjointSet()

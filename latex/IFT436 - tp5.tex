@@ -1,0 +1,152 @@
+
+%\documentclass[paper=letter, fontsize=11pt]{scrartcl}
+%
+%\usepackage[T1]{fontenc}
+%\usepackage[french]{babel}
+%\usepackage{graphicx}
+%\usepackage{subfig}
+%
+%\usepackage{fullpage} 
+%
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{amsthm}
+%
+%\usepackage{latexsym}
+%\usepackage{bbm}
+%\usepackage{color}
+%\usepackage{fancyhdr}
+%\usepackage[french, linesnumbered, ruled , vlined]{algorithm2e}
+%\usepackage[normalem]{ulem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt]{article} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[french]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{fullpage}
+
+\usepackage{algpseudocode}
+
+\usepackage{enumitem}
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\renewcommand{\theenumi}{\alph{enumi}}
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+\title{IFT436 - Algorithmes et structures de données}
+\author{Geneviève Dostie 12 078 306 et François Bélanger 94 245 437}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Universite de Sherbrooke} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Devoir \#5 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{François Bélanger, Jérémie Coulombe et Geneviève Dostie} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+\input{./title_page.tex}
+
+%----------------------------------------------------------------------------------------
+%	Introduction
+%----------------------------------------------------------------------------------------
+\Large\textbf{Introduction}\\
+Dans le cadre de notre dernier travail, le problème choisit est les arbres sous-tendant de coût minimal. Les trois algorithmes ont été codé en Python. Les trois algorithmes sont : Bor\r{u}vska, Krustal et Prim.\\
+\newline
+Dans ce rapport, il sera présenté les outils de travail, les algorithmes, la conception du générateur d'échantillon et les résultats avec nos hypothèses sur chaque algorithme.
+
+
+\vspace{0.7cm}
+
+%----------------------------------------------------------------------------------------
+%	Outil de travail
+%----------------------------------------------------------------------------------------
+\Large{\textbf{Outil de travail}}\\
+Pour ce travail, le langage choisit est le Python, version 2.7 . C'était un langage que certain connaissait plus que d'autre, mais simple et rapide à comprendre. De plus, c'était plus simple de trouver les algorithmes codés.\\
+\newline
+Pour programmer en Python, le programme de programmation choisit est PyCharm. Le code était partagé par GitHub pour faciliter l'accès au code, la distribution de tâches et permettre de garder les un historique des changement au cas où il faudrait revenir en arrière. Quant à PyCharm, il donne accès à un outil Git pratique et facile à utiliser contrairement à d'autre programme comme Visual Studio pour C++.
+
+\vspace{0.7cm}
+
+%----------------------------------------------------------------------------------------
+%	Nos algorithmes
+%----------------------------------------------------------------------------------------
+\Large{\textbf{Nos algorithmes}}\\
+Le choix des algorithmes fut en fonction de ce qui a été vu en classe et des algorithme proposé dans l'énoncé. Donc, les algorithmes sont Bor\r{u}vska, Krustal et Prim. Ce sont trois algorithmes de stratégie gloutonne, qui demande en entrée des structures données similaires.\\
+\newline
+Les algorithmes codés de Prim et Kruskal sur Internet. Quant à Bor\r{u}vka, aucun code acceptable a été trouvé, donc il a été codé. Une classe DisjointSet a été créé pour les algoritmes Bor\r{u}vska et Krustal.\\
+
+\vspace{0.7cm}
+
+%----------------------------------------------------------------------------------------
+%	Générateur de graphe
+%----------------------------------------------------------------------------------------
+\Large{\textbf{Générateur d'échantillon}}\\
+Le générateur de graphe a été construit selon la documenttation trouvé sur Internet: \textit{https://en.wikipedia.org/wiki/Mersenne\_Twister}. Dans le code du générateur de graphe, la fonction «random» de Python est utilié. 
+
+
+\vspace{0.7cm}
+
+%----------------------------------------------------------------------------------------
+%	Résultats
+%----------------------------------------------------------------------------------------
+\Large{\textbf{Résultats}}\\
+
+
+
+\vspace{0.7cm}
+
+%----------------------------------------------------------------------------------------
+%	Conclusion
+%----------------------------------------------------------------------------------------
+\Large{\textbf{Conclusion}}\\
+
+
+
+\end{document}

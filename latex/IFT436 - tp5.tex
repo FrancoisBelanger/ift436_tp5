@@ -1,44 +1,3 @@
-
-%\documentclass[paper=letter, fontsize=11pt]{scrartcl}
-%
-%\usepackage[T1]{fontenc}
-%\usepackage[french]{babel}
-%\usepackage{graphicx}
-%\usepackage{subfig}
-%
-%\usepackage{fullpage} 
-%
-%\usepackage{amsmath}
-%\usepackage{amssymb}
-%\usepackage{amsthm}
-%
-%\usepackage{latexsym}
-%\usepackage{bbm}
-%\usepackage{color}
-%\usepackage{fancyhdr}
-%\usepackage[french, linesnumbered, ruled , vlined]{algorithm2e}
-%\usepackage[normalem]{ulem}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Short Sectioned Assignment
-% LaTeX Template
-% Version 1.0 (5/5/12)
-%
-% This template has been downloaded from:
-% http://www.LaTeXTemplates.com
-%
-% Original author:
-% Frits Wenneker (http://www.howtotex.com)
-%
-% License:
-% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
-
 \documentclass[11pt]{article} % A4 paper and 11pt font size
 
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
@@ -101,13 +60,12 @@ Dans le cadre de notre dernier travail, le problème choisit est les arbres sous-
 \newline
 Dans ce rapport, il sera présenté les outils de travail, les algorithmes, la conception du générateur d'échantillon et les résultats avec nos hypothèses sur chaque algorithme.
 
-
 \vspace{0.7cm}
 
 %----------------------------------------------------------------------------------------
 %	Outil de travail
 %----------------------------------------------------------------------------------------
-\Large{\textbf{Outil de travail}}\\
+\Large\textbf{Outil de travail}\\
 Pour ce travail, le langage choisit est le Python, version 2.7 . C'était un langage que certain connaissait plus que d'autre, mais simple et rapide à comprendre. De plus, c'était plus simple de trouver les algorithmes codés.\\
 \newline
 Pour programmer en Python, le programme de programmation choisit est PyCharm. Le code était partagé par GitHub pour faciliter l'accès au code, la distribution de tâches et permettre de garder les un historique des changement au cas où il faudrait revenir en arrière. Quant à PyCharm, il donne accès à un outil Git pratique et facile à utiliser contrairement à d'autre programme comme Visual Studio pour C++.
@@ -117,44 +75,45 @@ Pour programmer en Python, le programme de programmation choisit est PyCharm. Le
 %----------------------------------------------------------------------------------------
 %	Nos algorithmes
 %----------------------------------------------------------------------------------------
-\Large{\textbf{Nos algorithmes}}\\
-Le choix des algorithmes fut en fonction de ce qui a été vu en classe et des algorithme proposé dans l'énoncé. Donc, les algorithmes sont Bor\r{u}vska, Krustal et Prim. Ce sont trois algorithmes de stratégie gloutonne, qui demande en entrée des structures données similaires.\\
+\Large\textbf{Nos algorithmes}\\
+Le choix des algorithmes fut en fonction de ce qui a été vu en classe et des algorithme proposé dans l'énoncé. Donc, les algorithmes sont Bor\r{u}vska, Krustal et Prim. Ce sont trois algorithmes de stratégie gloutonne.\\
 \newline
-Le seul algorithme dont le code a été trouvé sur Internet, c'est celui de  Kruskal. Quant à Bor\r{u}vka et Prim, aucun code acceptable a été trouvé, donc c'était préférable de les coder. Par code raisonnable dans ce cas-ci, cela se définie par le fait que le code trouvé ne nous demande pas de le modifier trop et que le code est optimal. Une classe DisjointSet a été créé pour les algoritmes Bor\r{u}vska et Krustal, qui est tiré du code de l'algorithme de Kruskal.\\
-\newline
-\underline{Bor\r{u}vka}\\
-
-\newline
-\underline{Kruskal}\\
-
-\newline
-\underline{Prim}\\
+Le seul algorithme dont le code a été trouvé sur Internet, c'est celui de  Kruskal. Quant à Bor\r{u}vka et Prim, aucun code acceptable a été trouvé, donc c'était préférable de les coder. Par code raisonnable dans ce cas-ci, il a été déterminé par le fait que le code trouvé ne demande pas de modification majeur et que le code construit de manière optimal.\\
+\newpage
+\underline{Classe DisjointSet}\\
+Une classe DisjointSet a été créé pour les algoritmes Bor\r{u}vska et Krustal, qui est tiré du code de l'algorithme de Kruskal. Celui-ci permet de faire des ensembles de sommets, trouver un sommet et relier 2 sommets ensembles.
 
 \vspace{0.7cm}
 
 %----------------------------------------------------------------------------------------
 %	Générateur de graphe
 %----------------------------------------------------------------------------------------
-\Large{\textbf{Générateur d'échantillon}}\\
+\Large\textbf{Générateur d'échantillon}\\
 Le générateur de graphe a été construit selon la documentation trouvé sur Internet: \textit{https://en.wikipedia.org/wiki/Mersenne\_Twister}. Dans le code du générateur de graphe, la fonction «random» de Python est utilié. Contrairement à la fonction de C++, celui-ci est efficace.
-
 
 \vspace{0.7cm}
 
 %----------------------------------------------------------------------------------------
 %	Résultats
 %----------------------------------------------------------------------------------------
-\Large{\textbf{Résultats}}\\
-
-
+\Large\textbf{Résultats}\\
+Il sera présenté dans cette section les hypothèses puis les résultats de des tests. Il sera considérer le nombre de sommets $n$ et le nombre d'arête $m$.\\
+\newline
+\underline{Bor\r{u}vka}\\
+L'hypothèse de complexité de cet algorithme est $O(m\, log\, n)$.\\
+\newline
+\underline{Kruskal}\\
+L'hypothèse de  complexité de cet algorithme est $O(mn)$. \\
+\newline
+\underline{Prim}\\
+L'hypothèse de complexité de cet algorithme est $O(m\, log\, m)$.\\
 
 \vspace{0.7cm}
 
 %----------------------------------------------------------------------------------------
 %	Conclusion
 %----------------------------------------------------------------------------------------
-\Large{\textbf{Conclusion}}\\
-
-
+\Large\textbf{Conclusion}\\
+text
 
 \end{document}

@@ -35,11 +35,10 @@ def save_graph(timed, step_sizes):
 
 def parm():
     parser = argparse.ArgumentParser(description="put someting here")
-    parser.add_argument('n', type=int, default=10000, help="Max data size")
-    parser.add_argument('--step_size', '-s', type=int, default=100, help="Data size step increment")
-    parser.add_argument('--nb_test', '-t', type=int, default=1000, help="Number of test at each data size")
-    parser.add_argument('--step_number', '-sn', type=int, help="Number of step to go from 1 to n" +
-                                                               " in each batch of test. Override data step size")
+    parser.add_argument('--n_min', '-n', type=int, default=100, help="Min data size")
+    parser.add_argument('--n_max', '-N', type=int, default=10000, help="Max data size")
+    parser.add_argument('--nb_sample', '-s', type=int, default=100, help="Number of random samples")
+    parser.add_argument('--nb_repetition', '-r', type=int, default=1000, help="Number of test at each data size")
     args = parser.parse_args()
 
     return args
@@ -50,12 +49,11 @@ def test(args):
     random.seed(0)
     random_state = random.getstate()
 
-    s_size = args.step_size
+    step_sizes = random.sample(xrange(args.n_min+1, args.n_max), args.nb_sample-2)
+    step_sizes.append(args.n_min)
+    step_sizes.append(args.n_max)
+    step_sizes.sort()
 
-    if args.step_number is not None:
-        s_size = args.n / args.step_number
-
-    step_sizes = range(s_size, args.n+s_size, s_size)
     timed = np.zeros((nb_algo, len(step_sizes)))
 
     fct = [boruvka, kruskal, prim]
@@ -63,10 +61,9 @@ def test(args):
     for algo_idx in range(nb_algo):
         random.setstate(random_state)
 
-
         for sz_idx in range(len(step_sizes)):
             start_time = timeit.default_timer()
-            for test_iter in xrange(0, args.nb_test):
+            for test_iter in xrange(0, args.nb_repetition):
                 graph = generate_graph(step_sizes[sz_idx])
                 #execute the algo on the graph
                 fct[algo_idx](graph[algo_idx % 2])
@@ -78,7 +75,7 @@ def test(args):
     for sz_idx in range(len(step_sizes)):
         start_time = timeit.default_timer()
 
-        for test_iter in xrange(0, args.nb_test):
+        for test_iter in xrange(0, args.nb_repetition):
                 graph = generate_graph(step_sizes[sz_idx])
 
         delta = timeit.default_timer() - start_time
@@ -86,13 +83,13 @@ def test(args):
         for i in range(nb_algo):
             timed[i][sz_idx] -= delta
 
-    timed /= step_sizes
+    timed /= args.nb_repetition
 
     name ='data_' + str(time.time())
 
     np.save(name, timed)
 
-    # save_graph(timed, step_sizes)
+    save_graph(timed, step_sizes)
 
 if __name__ == "__main__":
     arg = parm()

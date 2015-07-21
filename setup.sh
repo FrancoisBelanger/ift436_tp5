@@ -4,3 +4,5 @@ virtualenv env
 cd env
 chmod 744 bin/activate
 source bin/activate
+
+pip install --upgrade matplotlib

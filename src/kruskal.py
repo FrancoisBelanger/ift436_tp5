@@ -2,7 +2,9 @@ from disjoint_set import DisjointSet
 
 # adapted from https://github.com/israelst/Algorithms-Book--Python/blob/master/5-Greedy-algorithms/kruskal.py
 
-def kruskal(vertex_list, edge_list):
+
+def kruskal(args):
+    vertex_list, edge_list = args
     disj_set = DisjointSet()
     min_span_tree = []
 

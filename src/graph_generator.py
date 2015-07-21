@@ -6,8 +6,6 @@ MAX_WEIGHT = 100
 # Average degree of vertices
 AVG_DEG = 10
 
-# Set random seed
-random.seed(5)
 
 def generate_graph(n):
     # Graph structures that must be generated in parallel
@@ -44,4 +42,4 @@ def generate_graph(n):
         adj_list[u][v] = adj_list[v][u] = weight
         edges.append((weight, u, v))
 
-    return adj_list, range(0, n), edges
+    return adj_list, (range(0, n), edges)

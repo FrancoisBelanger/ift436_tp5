@@ -4,6 +4,7 @@ __author__ = 'Francois Belanger 94 245 437' \
 
 import argparse
 # import random
+import time
 import timeit
 
 import numpy as np
@@ -62,7 +63,7 @@ def test(args):
     for algo_idx in range(nb_algo):
         random.setstate(random_state)
 
-      # TODO: iterate on the step_size
+
         for sz_idx in range(len(step_sizes)):
             start_time = timeit.default_timer()
             for test_iter in xrange(0, args.nb_test):
@@ -87,7 +88,11 @@ def test(args):
 
     timed /= step_sizes
 
-    save_graph(timed, step_sizes)
+    name ='data_' + str(time.time())
+
+    np.save(name, timed)
+
+    # save_graph(timed, step_sizes)
 
 if __name__ == "__main__":
     arg = parm()

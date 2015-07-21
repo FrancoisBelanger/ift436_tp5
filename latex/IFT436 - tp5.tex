@@ -7,6 +7,7 @@
 \usepackage{fullpage}
 
 \usepackage{algpseudocode}
+\usepackage{listings}
 
 \usepackage{enumitem}
 \usepackage{sectsty} % Allows customizing section commands
@@ -29,7 +30,7 @@
 
 \setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
 \title{IFT436 - Algorithmes et structures de données}
-\author{François Bélanger 94 245 437, Jérémie Coulombe 13 061 991 et Geneviève Dostie 12 078 306 et }
+\author{François Bélanger 94 245 437, Jérémie Coulombe 13 061 991 et Geneviève Dostie 12 078 306}
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -55,7 +56,7 @@
 %----------------------------------------------------------------------------------------
 %	Introduction
 %----------------------------------------------------------------------------------------
-\Large\textbf{Introduction}\\
+\textbf{Introduction}\\
 Dans le cadre du dernier travail, une étude de performance d'exécution de différents algorithmes pour un même type de problème était à faire. Chaque équipe devait choisir un problème et au moins trois algorithmes pour résoudre le problème choisi. L'équipe a choisi le problème du calcul de l'arbre sous-tendant de coût minimal. Les trois algorithmes sont : Bor\r{u}vska, Krustal et Prim. Les trois algorithmes ont été codé en Python avec le logiciel PyCharm.
 \vspace{0.3cm}
 
@@ -65,7 +66,7 @@ Dans ce rapport, il sera présenté les outils de travail pour partager le code et
 %----------------------------------------------------------------------------------------
 %	Outil de travail
 %----------------------------------------------------------------------------------------
-\Large\textbf{Outil de travail}\\
+\textbf{Outil de travail}\\
 Pour ce travail, le langage choisit est le Python, version 2.7 . C'était un langage que certain connaissait plus que d'autre, mais simple et rapide à comprendre. De plus, il semblait plus simple de trouver les algorithmes choisis codés afin de ce concentrer plus sur les tests et les résultats.
 \vspace{0.3cm}
 
@@ -75,7 +76,7 @@ Pour programmer en Python, le programme de programmation choisit est PyCharm. Py
 %----------------------------------------------------------------------------------------
 %	Nos algorithmes
 %----------------------------------------------------------------------------------------
-\Large\textbf{Nos algorithmes}\\
+\textbf{Nos algorithmes}\\
 Le choix des algorithmes fut en fonction de ce qui a été vu en classe et des algorithmes proposés dans l'énoncé du travail. Les algorithmes choisis pour ce travail sont Bor\r{u}vska, Krustal et Prim. Ce sont trois algorithmes de stratégie gloutonne, mais avec des complexités différentes que nous présenterons dans nos hypothèses.
 \vspace{0.3cm}
 
@@ -89,7 +90,7 @@ La classe \textit{DisjointSet} a été créé pour les algoritmes Bor\r{u}vska et Kr
 %----------------------------------------------------------------------------------------
 %	Générateur de graphe
 %----------------------------------------------------------------------------------------
-\Large\textbf{Générateur d'échantillon}\\
+\textbf{Générateur d'échantillon}\\
 Le générateur de graphe a été construit selon la documentation trouvé sur Internet: \textit{https://en.wikipedia.org/wiki/Mersenne\_Twister}. Dans le code du générateur de graphe, la fonction << \textit{random} >> de Python est utilisée. Contrairement à la fonction de C++, celui-ci est efficace.
 
 \vspace{0.7cm}
@@ -97,12 +98,12 @@ Le générateur de graphe a été construit selon la documentation trouvé sur Intern
 %----------------------------------------------------------------------------------------
 %	Résultats
 %----------------------------------------------------------------------------------------
-\Large\textbf{Expérience de travail}\\
+\textbf{Expérience de travail}\\
 Il sera présenté dans cette section les hypothèses puis les résultats de des tests. Il sera expliqué la méthodologie pour obtenir les résultats. Il sera considérer $n$ le nombre de sommets et $m$ le nombre d'arêtes.
 \vspace{0.5cm}
 
 \underline{Hypothèses}\\
-D'abord, la complexité des algorithme devraientt être: $O(m\, log\, n)$ pour Bor\r{u}vka, $O(m\, log\, m)$ pour Kruskal et $O(m\, log\, n)$ pour Prim.
+D'abord, la complexité des algorithme devraient être: $O(m\, log\, n)$ pour Bor\r{u}vka, $O(m\, log\, m)$ pour Kruskal et $O(m\, log\, n)$ pour Prim.
 Il est à croire qu'étant de même complexité, Bor\r{u}vka et Prim auront un temps de calcul similaire. Pour ce qui est de Kruskal, il devrait être le plus performant des trois algorithmes par sa différence $log\, m$, car il y aura au plus $\frac{n(n-1)}{2}$ arêtes.
 \vspace{0.5cm}
 
@@ -110,7 +111,7 @@ Il est à croire qu'étant de même complexité, Bor\r{u}vka et Prim auront un temps
 Pour faire le temps de calcul pour un graphe de $n$ sommets, une moyenne du temps est fait sur une boucle qui exécute 100 fois sur une même taille d'échantillon. Pour ce qui est de l'échantillonnage, il est fait par pas de $10^i$, pour $i$ = 1, 2, ..., $k$. Le $k$ est déterminé selon la rapidité d'exécution de l'ordinateur, choisit dans le laboratoire informatique.\\
 \vspace{0.3cm}
 
-Pour recueillir les données sur le temps d'exécution versus le nombre de sommet, une librairie a été importé. La librairie s'appelle \textit{matplotlib}.
+Pour recueillir les données sur le temps d'exécution versus le nombre de sommet, la librairie \textit{matplotlib} a été importé. Cette librairie permet de faire un graphique des données recueillies. Cela évite de devoir les compiler dans un fichier pour faire un graphique avec un logiciel comme Excel.
 \vspace{0.5cm}
 
 \underline{Résultats}\\
@@ -120,7 +121,37 @@ Pour recueillir les données sur le temps d'exécution versus le nombre de sommet,
 %----------------------------------------------------------------------------------------
 %	Conclusion
 %----------------------------------------------------------------------------------------
-\Large\textbf{Conclusion}\\
+\textbf{Conclusion}\\
 En conclusion,
 
+
+\vspace{0.7cm}
+
+%----------------------------------------------------------------------------------------
+%	Annexe
+%----------------------------------------------------------------------------------------
+\newpage
+\begin{center} \Large\textbf{Annexes} \end{center}
+\textbf{boruvka.py}
+\lstinputlisting[language=Python, basicstyle=\scriptsize]{../src/boruvka.py}
+\vspace{0.5cm}
+
+\textbf{kruskal.py}
+\lstinputlisting[language=Python, basicstyle=\scriptsize]{../src/kruskal.py}
+\vspace{0.5cm}
+
+\textbf{prim.py}
+\lstinputlisting[language=Python, basicstyle=\scriptsize]{../src/prim.py}
+\vspace{0.5cm}
+
+\textbf{graph\_generator.py}
+\lstinputlisting[language=Python, basicstyle=\scriptsize]{../src/graph_generator.py}
+\vspace{0.5cm}
+
+\textbf{disjoint\_set}
+\lstinputlisting[language=Python, basicstyle=\scriptsize]{../src/disjoint_set.py}
+\vspace{0.5cm}
+
+\textbf{framework.py}
+\lstinputlisting[language=Python, basicstyle=\scriptsize]{../src/framework.py}
 \end{document}

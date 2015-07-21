@@ -25,6 +25,8 @@ def save_graph(timed, step_sizes):
 
     plt.title(u"Temps d'execution en  fonction de la taille des donnee")
     plt.ylabel("temp (sec.)")
+    plt.legend(['Boruvka', 'Kruskal', 'Prim'], loc='upper left')
+
     print "step_sizes", step_sizes
     print "timed", timed
     plt.show()

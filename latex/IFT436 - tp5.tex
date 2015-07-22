@@ -57,61 +57,67 @@
 %	Introduction
 %----------------------------------------------------------------------------------------
 \textbf{Introduction}\\
-Dans le cadre du dernier travail, une étude de performance d'exécution de différents algorithmes pour un même type de problème était à faire. Chaque équipe devait choisir un problème et au moins trois algorithmes pour résoudre le problème choisi. L'équipe a choisi le problème du calcul de l'arbre sous-tendant de coût minimal. Les trois algorithmes sont : Bor\r{u}vska, Krustal et Prim. Les trois algorithmes ont été codé en Python avec le logiciel PyCharm.
+
+Pour ce dernier travail pratique du cours, il était question d'effectuer une étude de performance de différents algorithmes s'attaquant au même problème. Les équipes étaient libres de choisir un problème de leur choix et de réunir un minimum de trois algorithme différent pour résoudre celui-ci. Dans le cas présent, le calcul de l'arbre sous-tendant de coût minimal d'un graphe non-orienté connexe valué à été sélectionné. Trois algorithmes classiques -- ceux de Bor\r{u}vka, de  Krustal et de Prim -- ont été retenu pour l'étude. Ceux-ci ont été codé et exécuté avec Python.
+
 \vspace{0.3cm}
 
-Dans ce rapport, il sera présenté les outils de travail pour partager le code et facilité l'avancement du travail, les algorithmes choisis, la conception du générateur d'échantillon pour faire les test et les résultats de no tests avec les hypothèses les algorithmes.
+Dans ce rapport seront présenté les algorithmes choisis, incluant les hypothèses concernant leur complexité, les outils de travail utilisés, tant pour partager les sources que pour les développer, la conception du générateur d'échantillons aléatoires ainsi que les résultats de l'étude.
+
 \vspace{0.7cm}
 
 %----------------------------------------------------------------------------------------
 %	Outil de travail
 %----------------------------------------------------------------------------------------
 \textbf{Outil de travail}\\
-Pour ce travail, le langage choisit est le Python, version 2.7 . C'était un langage que certain connaissait plus que d'autre, mais simple et rapide à comprendre. De plus, il semblait plus simple de trouver les algorithmes choisis codés afin de ce concentrer plus sur les tests et les résultats.
+
+Pour ce travail, le langage choisi a été Python, sous sa version 2.7 Bien qu'il ne figure pas dans les palmarès des langages les plus performant, l'expérience a été tenté, permettant ainsi pour la plupart des coéquipiers d'en apprendre davantage sur ce langage . De plus, il semblait plus simple  -- du moins, c'est ce qui était prévu!  -- de trouver de bons algorithmes sur internet afin de se concentrer plus sur les tests et les résultats. Hélas, la ré-écriture de 2 des 3 algorithmes à été nécessaire.
+
 \vspace{0.3cm}
 
-Pour programmer en Python, le programme de programmation choisit est PyCharm. PyCharm donne accès à un outil Git pratique et facile à utiliser contrairement à d'autre programme comme Visual Studio pour C++. GitHub fut utilisé avant tout pour le partage et faciliter l'accès au code, la distribution de tâches et permettre de garder les un historique des changement au cas où il faudrait revenir en arrière.
+Pour programmer en Python, l'environnement de développement choisi a été PyCharm 4.5.3. Dans PyCharm est inclus un outil Git qui a été utile pour le travail; en effet, le client web GitHub fut utilisé pour le partage des sources, la distribution de tâches et pour la consultation de l'historique des changements pour les cas de nécessité de retour en arrière.
+
 \vspace{0.7cm}
 
 %----------------------------------------------------------------------------------------
 %	Nos algorithmes
 %----------------------------------------------------------------------------------------
 \textbf{Nos algorithmes}\\
-Le choix des algorithmes fut en fonction de ce qui a été vu en classe et des algorithmes proposés dans l'énoncé du travail. Les algorithmes choisis pour ce travail sont Bor\r{u}vska, Krustal et Prim. Ce sont trois algorithmes de stratégie gloutonne, mais avec des complexités différentes que nous présenterons dans nos hypothèses.
+
+Le choix des algorithmes a été orienté par la liste des algorithmes de calcul de l'arbre sous-tendant à coût minimal présentée en classe, ainsi que par un 3e algorithme inclus dans la liste des propositions dans l'énoncé du travail. Les algorithmes développés par Bor\r{u}vka,  Krustal et Prim sont tous de stratégie gloutonne, mais ne partagent pas les mêmes complexités algorithmiques. L'algorithme de Bor\r{u}vka n'a pas été trouvé sur internet en langage Python, donc une version dérivée du pseudo-code présenté sur la page Wikipédia "Bor\r{u}vka algorithm" a été programmée. L'algorithme de Kruskal a été tiré et adapté d'un dépôt GitHub de l'utilisateur "israelst", qui indique l'avoir adapté du livre "Algorithms" de Dasgupta, Papadimitriou and Vazurani. Aucun algorithme efficace n'ayant été trouvé pour la méthode de Prim, une adaptation Python du pseudo-code présenté dans les notes du présent cours a été préconisée. Une classe représentant un ensemble d'ensembles disjoints a été créé pour unifier le fonctionnement des algorithmes de Bor\r{u}vka et de Krustal. Le code a été tiré des sources originales de l'algorithme de Kruskal trouvé sur internet. 
+
 \vspace{0.3cm}
 
-Le seul algorithme dont le code a été trouvé sur Internet, c'est celui de  Kruskal. Quant à Bor\r{u}vka et Prim, aucun code acceptable a été trouvé, donc c'était préférable de les écrire pour ne pas perdre trop de temps sur cet tâche. Dans ce cas-ci, un code raisonnable a été déterminé par le fait qu'il ne demande pas de modification majeur et qu'il est construit de manière optimal.
-\vspace{0.5cm}
+\underline{Hypothèses}\\
 
-\underline{Classe DisjointSet}\\
-La classe \textit{DisjointSet} a été créé pour les algoritmes Bor\r{u}vska et Krustal, qui est tiré du code de l'algorithme de Kruskal. Celui-ci permet de faire des ensembles de sommets, trouver un sommet et relier 2 sommets ensembles. Cette partie de code était avant tout utilisée pour l'algorithme de Kruskal. Celle-ci a été mise dans une classe pour avoir la possibilité, lorsque possible, de l'utiliser dans d'autre algorithme.
+Tout d'abord, la complexité des algorithme devraient être les suivantes pour un $m$ signifiant le nombre d'arêtes du graphe et $n$ son nombre de noeuds: $O(m\, log\, n)$ pour Bor\r{u}vka, $O(m\, log\, m)$ pour Kruskal et $O(m\, log\, n)$ pour Prim.
+Il est donc à comprendre qu'étant de même complexité, Bor\r{u}vka et Prim auront un temps d'exécution similaire. Pour ce qui est de Kruskal, il devrait être le moins performant des trois algorithmes car son log\ s'applique sur le nombre d'arêtes de non sur le nombre de noeuds. 
+
 \vspace{0.7cm}
 
 %----------------------------------------------------------------------------------------
 %	Générateur de graphe
 %----------------------------------------------------------------------------------------
-\textbf{Générateur d'échantillon}\\
-Le générateur de graphe a été construit selon la documentation trouvé sur Internet: \textit{https://en.wikipedia.org/wiki/Mersenne\_Twister}. Dans le code du générateur de graphe, la fonction << \textit{random} >> de Python est utilisée. Contrairement à la fonction de C++, celui-ci est efficace.
+
+\textbf{Générateur d'échantillons}\\
+La dernière affirmation est vraie car le générateur utilisé pour générer les données de l'étude a été paramétré pour générer des graphes ayant exactement 10 fois plus d'arêtes que de noeuds. Il fonctionne de la façon suivante: on relie $n$ noeuds de façon linéaire par des arêtes de poids aléatoires entre 1 et 100 puis on génère des arêtes de même distribution de poids entre des paires noeuds non-reliés choisis aléatoirement jusqu'à atteindre un nombre d'arêtes égale à 10 fois le nombre de noeuds.
+
+\vspace{0.3cm}
+
+\underline{Générateur de nombres aléatoires}\\
+Le générateur de nombres aléatoires générique de Python est basé sur une implémentation en C du Marsenne Twister, un algorithme avec une période de $2^{19937}-1$ fortement testé (voir \textit{https://en.wikipedia.org/wiki/Mersenne\_Twister}) . Dans le code du générateur de graphe, la fonction << \textit{sample} >> de Python est utilisée, qui est une application du << \textit{random} >> de Python qui utilise le Marsenne Twister.
 
 \vspace{0.7cm}
 
 %----------------------------------------------------------------------------------------
 %	Résultats
 %----------------------------------------------------------------------------------------
-\textbf{Expérience de travail}\\
-Il sera présenté dans cette section les hypothèses puis les résultats de des tests. Il sera expliqué la méthodologie pour obtenir les résultats. Il sera considérer $n$ le nombre de sommets et $m$ le nombre d'arêtes.
-\vspace{0.5cm}
 
-\underline{Hypothèses}\\
-D'abord, la complexité des algorithme devraient être: $O(m\, log\, n)$ pour Bor\r{u}vka, $O(m\, log\, m)$ pour Kruskal et $O(m\, log\, n)$ pour Prim.
-Il est à croire qu'étant de même complexité, Bor\r{u}vka et Prim auront un temps de calcul similaire. Pour ce qui est de Kruskal, il devrait être le plus performant des trois algorithmes par sa différence $log\, m$, car il y aura au plus $\frac{n(n-1)}{2}$ arêtes.
-\vspace{0.5cm}
-
-\underline{Méthodologie}\\
-Pour faire le temps de calcul pour un graphe de $n$ sommets, une moyenne du temps est fait sur une boucle qui exécute 100 fois sur une même taille d'échantillon. Pour ce qui est de l'échantillonnage, il est fait par pas de $10^i$, pour $i$ = 1, 2, ..., $k$. Le $k$ est déterminé selon la rapidité d'exécution de l'ordinateur, choisit dans le laboratoire informatique.\\
+\textbf{Méthodologie}\\
+À COMPLÉTER\\
 \vspace{0.3cm}
 
-Pour recueillir les données sur le temps d'exécution versus le nombre de sommet, la librairie \textit{matplotlib} a été importé. Cette librairie permet de faire un graphique des données recueillies. Cela évite de devoir les compiler dans un fichier pour faire un graphique avec un logiciel comme Excel.
+Pour recueillir les données sur le temps d'exécution versus le nombre de sommet, la librairie \textit{matplotlib} a été importé. Cette librairie permet de tracer un graphique à partir des données recueillies, évitant ainsi la nécessité d'une compilation des résultats bruts dans un fichier pour ensuite produire des graphiques avec un logiciel comme Excel.
 \vspace{0.5cm}
 
 \underline{Résultats}\\

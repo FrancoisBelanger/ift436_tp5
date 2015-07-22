@@ -57,8 +57,7 @@
 %	Introduction
 %----------------------------------------------------------------------------------------
 \textbf{Introduction}\\
-
-Pour ce dernier travail pratique du cours, il était question d'effectuer une étude de performance de différents algorithmes s'attaquant au même problème. Les équipes étaient libres de choisir un problème de leur choix et de réunir un minimum de trois algorithme différent pour résoudre celui-ci. Dans le cas présent, le calcul de l'arbre sous-tendant de coût minimal d'un graphe non-orienté connexe valué à été sélectionné. Trois algorithmes classiques -- ceux de Bor\r{u}vka, de  Krustal et de Prim -- ont été retenu pour l'étude. Ceux-ci ont été codé et exécuté avec Python.
+Pour ce dernier travail pratique du cours, il était question d'effectuer une étude de performance de différents algorithmes s'attaquant au même problème. Les équipes étaient libres de choisir un problème de leur choix et de réunir un minimum de trois algorithmes différents pour résoudre celui-ci. Dans le cas présent, le calcul de l'arbre sous-tendant de coût minimal d'un graphe non-orienté connexe valué à été sélectionné. Trois algorithmes classiques -- ceux de Bor\r{u}vka, de  Krustal et de Prim -- ont été retenu pour l'étude. Ceux-ci ont été codés et exécutés avec Python.
 
 \vspace{0.3cm}
 
@@ -70,9 +69,7 @@ Dans ce rapport seront présenté les algorithmes choisis, incluant les hypothèses
 %	Outil de travail
 %----------------------------------------------------------------------------------------
 \textbf{Outil de travail}\\
-
-Pour ce travail, le langage choisi a été Python, sous sa version 2.7 Bien qu'il ne figure pas dans les palmarès des langages les plus performant, l'expérience a été tenté, permettant ainsi pour la plupart des coéquipiers d'en apprendre davantage sur ce langage . De plus, il semblait plus simple  -- du moins, c'est ce qui était prévu!  -- de trouver de bons algorithmes sur internet afin de se concentrer plus sur les tests et les résultats. Hélas, la ré-écriture de 2 des 3 algorithmes à été nécessaire.
-
+Pour ce travail, le langage choisi a été Python, sous sa version 2.7. Bien qu'il ne figure pas dans les palmarès des langages les plus performants, l'expérience a été tentée, permettant ainsi pour la plupart des coéquipiers d'en apprendre davantage sur ce langage . De plus, il semblait plus simple  -- du moins, c'est ce qui était prévu!  -- de trouver de bons algorithmes sur internet afin de se concentrer plus sur les tests et les résultats. Hélas, la réécriture de 2 des 3 algorithmes a été nécessaire.
 \vspace{0.3cm}
 
 Pour programmer en Python, l'environnement de développement choisi a été PyCharm 4.5.3. Dans PyCharm est inclus un outil Git qui a été utile pour le travail; en effet, le client web GitHub fut utilisé pour le partage des sources, la distribution de tâches et pour la consultation de l'historique des changements pour les cas de nécessité de retour en arrière.
@@ -83,15 +80,17 @@ Pour programmer en Python, l'environnement de développement choisi a été PyCharm
 %	Nos algorithmes
 %----------------------------------------------------------------------------------------
 \textbf{Nos algorithmes}\\
+Le choix des algorithmes a été orienté par la liste des algorithmes de calcul de l'arbre sous-tendant à coût minimal présentée en classe, ainsi que par un 3e algorithme inclus dans la liste des propositions dans l'énoncé du travail. Les algorithmes développés par Bor\r{u}vka,  Krustal et Prim sont tous de stratégie gloutonne, mais ne partagent pas les mêmes complexités algorithmiques.
 
-Le choix des algorithmes a été orienté par la liste des algorithmes de calcul de l'arbre sous-tendant à coût minimal présentée en classe, ainsi que par un 3e algorithme inclus dans la liste des propositions dans l'énoncé du travail. Les algorithmes développés par Bor\r{u}vka,  Krustal et Prim sont tous de stratégie gloutonne, mais ne partagent pas les mêmes complexités algorithmiques. L'algorithme de Bor\r{u}vka n'a pas été trouvé sur internet en langage Python, donc une version dérivée du pseudo-code présenté sur la page Wikipédia "Bor\r{u}vka algorithm" a été programmée. L'algorithme de Kruskal a été tiré et adapté d'un dépôt GitHub de l'utilisateur "israelst", qui indique l'avoir adapté du livre "Algorithms" de Dasgupta, Papadimitriou and Vazurani. Aucun algorithme efficace n'ayant été trouvé pour la méthode de Prim, une adaptation Python du pseudo-code présenté dans les notes du présent cours a été préconisée. Une classe représentant un ensemble d'ensembles disjoints a été créé pour unifier le fonctionnement des algorithmes de Bor\r{u}vka et de Krustal. Le code a été tiré des sources originales de l'algorithme de Kruskal trouvé sur internet. 
+\vspace{0.3cm}
+
+L'algorithme de Bor\r{u}vka n'a pas été trouvé sur internet en langage Python, donc une version dérivée du pseudo-code présenté sur la page Wikipédia << Bor\r{u}vka algorithm >> a été programmée. L'algorithme de Kruskal a été tiré et adapté d'un dépôt GitHub de l'utilisateur << israelst >>, qui indique l'avoir adapté du livre << Algorithms >> de Dasgupta, Papadimitriou et Vazurani. Aucun algorithme efficace n'ayant été trouvé pour la méthode de Prim, une adaptation Python du pseudo-code présenté dans les notes du présent cours a été préconisée. Une classe représentant un ensemble d'ensembles disjoints a été créée pour unifier le fonctionnement des algorithmes de Bor\r{u}vka et de Krustal. Le code a été tiré des sources originales de l'algorithme de Kruskal trouvé sur internet. 
 
 \vspace{0.3cm}
 
 \underline{Hypothèses}\\
-
-Tout d'abord, la complexité des algorithme devraient être les suivantes pour un $m$ signifiant le nombre d'arêtes du graphe et $n$ son nombre de noeuds: $O(m\, log\, n)$ pour Bor\r{u}vka, $O(m\, log\, m)$ pour Kruskal et $O(m\, log\, n)$ pour Prim.
-Il est donc à comprendre qu'étant de même complexité, Bor\r{u}vka et Prim auront un temps d'exécution similaire. Pour ce qui est de Kruskal, il devrait être le moins performant des trois algorithmes car son log\ s'applique sur le nombre d'arêtes de non sur le nombre de noeuds. 
+Tout d'abord, la complexité des algorithmes devrait être les suivantes pour un $m$ signifiant le nombre d'arêtes du graphe et $n$ son nombre de noeuds: $O(m\, log\, n)$ pour Bor\r{u}vka, $O(m\, log\, m)$ pour Kruskal et $O(m\, log\, n)$ pour Prim.
+Il est donc à comprendre qu'étant de même complexité, Bor\r{u}vka et Prim auront un temps d'exécution similaire. Pour ce qui est de Kruskal, il devrait être le moins performant des trois algorithmes, car son $log$ s'applique sur le nombre d'arêtes de non sur le nombre de noeuds.
 
 \vspace{0.7cm}
 
@@ -100,12 +99,12 @@ Il est donc à comprendre qu'étant de même complexité, Bor\r{u}vka et Prim auront
 %----------------------------------------------------------------------------------------
 
 \textbf{Générateur d'échantillons}\\
-La dernière affirmation est vraie car le générateur utilisé pour générer les données de l'étude a été paramétré pour générer des graphes ayant exactement 10 fois plus d'arêtes que de noeuds. Il fonctionne de la façon suivante: on relie $n$ noeuds de façon linéaire par des arêtes de poids aléatoires entre 1 et 100 puis on génère des arêtes de même distribution de poids entre des paires noeuds non-reliés choisis aléatoirement jusqu'à atteindre un nombre d'arêtes égale à 10 fois le nombre de noeuds.
+La dernière affirmation est vraie, car le générateur utilisé pour générer les données de l'étude a été paramétré pour générer des graphes ayant exactement 10 fois plus d'arêtes que de noeuds. Il fonctionne de la façon suivante: on relie $n$ noeuds de façon linéaire par des arêtes de poids aléatoires entre 1 et 100 puis on génère des arêtes de même distribution de poids entre des paires noeuds non-reliés choisis aléatoirement jusqu'à atteindre un nombre d'arêtes égales à 10 fois le nombre de noeuds.
 
 \vspace{0.3cm}
 
 \underline{Générateur de nombres aléatoires}\\
-Le générateur de nombres aléatoires générique de Python est basé sur une implémentation en C du Marsenne Twister, un algorithme avec une période de $2^{19937}-1$ fortement testé (voir \textit{https://en.wikipedia.org/wiki/Mersenne\_Twister}) . Dans le code du générateur de graphe, la fonction << \textit{sample} >> de Python est utilisée, qui est une application du << \textit{random} >> de Python qui utilise le Marsenne Twister.
+Le générateur de nombres aléatoires générique de Python est basé sur une implémentation en C du \textit{Marsenne Twister} \footnote{https://en.wikipedia.org/wiki/Mersenne\_Twister}, un algorithme avec une période de $2^{19937}-1$ fortement testé. Dans le code du générateur de graphe, la fonction \textit{randint} de Python est utilisée, qui est une application du \textit{random} de Python qui utilise le \textit{Marsenne Twister}.
 
 \vspace{0.7cm}
 
@@ -117,7 +116,8 @@ Le générateur de nombres aléatoires générique de Python est basé sur une impléme
 À COMPLÉTER\\
 \vspace{0.3cm}
 
-Pour recueillir les données sur le temps d'exécution versus le nombre de sommet, la librairie \textit{matplotlib} a été importé. Cette librairie permet de tracer un graphique à partir des données recueillies, évitant ainsi la nécessité d'une compilation des résultats bruts dans un fichier pour ensuite produire des graphiques avec un logiciel comme Excel.
+Pour recueillir les données sur le temps d'exécution versus le nombre de sommets, la librairie \textit{matplotlib} a été importée. Cette librairie permet de tracer un graphique à partir des données recueillies, évitant ainsi la nécessité d'une compilation des résultats bruts dans un fichier pour ensuite produire des graphiques avec un logiciel comme Excel.
+
 \vspace{0.5cm}
 
 \underline{Résultats}\\

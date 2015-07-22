@@ -2,6 +2,7 @@ from disjoint_set import DisjointSet
 
 # adapted from https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm)
 
+
 def boruvka(adj_list):
     disj_set = DisjointSet()
 

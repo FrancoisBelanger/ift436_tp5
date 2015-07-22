@@ -3,7 +3,7 @@ __author__ = 'Francois Belanger 94 245 437' \
              'Jeremie Coulombe 13 061 991'
 
 import argparse
-# import random
+import random
 import time
 import timeit
 
@@ -46,8 +46,8 @@ def parm():
 
 def test(args):
     # initializing pseudo random generator
-    random.seed(0)
-    random_state = random.getstate()
+    np.random.seed(0)
+    random_state = np.random.get_state()
 
     step_sizes = random.sample(xrange(args.n_min+1, args.n_max), args.nb_sample-2)
     step_sizes.append(args.n_min)
@@ -59,7 +59,7 @@ def test(args):
     fct = [boruvka, kruskal, prim]
     # TODO: iterate on the algo
     for algo_idx in range(nb_algo):
-        random.setstate(random_state)
+        np.random.set_state(random_state)
 
         for sz_idx in range(len(step_sizes)):
             start_time = timeit.default_timer()
@@ -71,7 +71,7 @@ def test(args):
             #timer stop
             timed[algo_idx][sz_idx] = timeit.default_timer() - start_time
 
-    random.setstate(random_state)
+    np.random.set_state(random_state)
     for sz_idx in range(len(step_sizes)):
         start_time = timeit.default_timer()
 
@@ -85,9 +85,10 @@ def test(args):
 
     timed /= args.nb_repetition
 
-    name ='data_' + str(time.time())
+    stamp = str(time.time())
 
-    np.save(name, timed)
+    np.save('data_'+stamp, timed)
+    np.save('step_'+stamp, step_sizes)
 
     save_graph(timed, step_sizes)
 

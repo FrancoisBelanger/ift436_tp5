@@ -3,6 +3,7 @@ from heapq import heappop, heappush
 
 # adapted from Algorithmes et structures de donnees, IFT436, Chap. 3, page 34, Richard St-Denis
 
+
 def prim(adj_list):
     queue = []
     costs = []

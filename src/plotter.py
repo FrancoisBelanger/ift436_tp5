@@ -12,7 +12,7 @@ algo = ['Boruvka', 'Kruskal', 'Prim']
 def plot_graph(x1, y1, x2, y2, idx):
     fig, ax = plt.subplots( nrows=1, ncols=1 )
     ax.plot(y1, x1[idx])
-    ax.plot(y1, x1[idx])
+    ax.plot(y2, x2[idx])
     plt.title("Temps d'execution de " + algo[idx])
     plt.ylabel("Temp (sec.)")
     plt.xlabel("Nombre de noeud dans le graph")
@@ -56,8 +56,7 @@ if __name__ == '__main__':
     x2 = np.load('data_100_30000_25_100.npy')
     y2 = np.load('step_100_30000_25_100.npy')
 
+    plot_bo(x1, y1, x2, y2)
+    plot_kr(x1, y1, x2, y2)
+    plot_pr(x1, y1, x2, y2)
     plot_total(x1, y1, x2, y2)
-
-    plot_bo(x1, y1, x2, y1)
-    plot_kr(x1, y1, x2, y1)
-    plot_pr(x1, y1, x2, y1)

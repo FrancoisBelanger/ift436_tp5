@@ -8,6 +8,7 @@
 
 \usepackage{algpseudocode}
 \usepackage{listings}
+\usepackage{color,graphicx,float,epsfig,amssymb,mathrsfs}
 
 \usepackage{enumitem}
 \usepackage{sectsty} % Allows customizing section commands
@@ -104,7 +105,13 @@ La dernière affirmation est vraie, car le générateur utilisé pour générer les do
 \vspace{0.3cm}
 
 \underline{Générateur de nombres aléatoires}\\
-Le générateur de nombres aléatoires générique de Python est basé sur une implémentation en C du \textit{Marsenne Twister} \footnote{https://en.wikipedia.org/wiki/Mersenne\_Twister}, un algorithme avec une période de $2^{19937}-1$ fortement testé. Dans le code du générateur de graphe, la fonction \textit{randint} de Python est utilisée, qui est une application du \textit{random} de Python qui utilise le \textit{Marsenne Twister}.
+Au début, pour faire le générateur de nombres aléatoires était basé sur une implémentation en C du \textit{Marsenne Twister} \footnote{https://en.wikipedia.org/wiki/Mersenne\_Twister}, un algorithme avec une période de $2^{19937}-1$ fortement testé. Le code du générateur de graphe utilisait la fonction \textit{randint} de Python, qui est une application du \textit{random} de Python qui utilise le \textit{Marsenne Twister}.
+
+\vspace{0.2cm}
+
+Cependant, il a été modifier pour augmenté la vitesse d'exécution.
+
+%Le générateur de nombres aléatoires générique de Python est basé sur une implémentation en C du \textit{Marsenne Twister} \footnote{https://en.wikipedia.org/wiki/Mersenne\_Twister}, un algorithme avec une période de $2^{19937}-1$ fortement testé. Dans le code du générateur de graphe, la fonction \textit{randint} de Python est utilisée, qui est une application du \textit{random} de Python qui utilise le \textit{Marsenne Twister}.
 
 \vspace{0.7cm}
 
@@ -113,14 +120,19 @@ Le générateur de nombres aléatoires générique de Python est basé sur une impléme
 %----------------------------------------------------------------------------------------
 
 \textbf{Méthodologie}\\
-À COMPLÉTER\\
+Pour exécuter les tests, un script a été créé. Celui-ci demande quatre paramètres: la taille minimum et max d'un graphe, le nombre d'échantillons à créer et le nombre de fois pour l'exécution d'une même taille. Cela permet de rouler les tests plus facilement et avec n'importe laquelle des consoles.\\
+
 \vspace{0.3cm}
 
 Pour recueillir les données sur le temps d'exécution versus le nombre de sommets, la librairie \textit{matplotlib} a été importée. Cette librairie permet de tracer un graphique à partir des données recueillies, évitant ainsi la nécessité d'une compilation des résultats bruts dans un fichier pour ensuite produire des graphiques avec un logiciel comme Excel.
 
-\vspace{0.5cm}
+\vspace{0.7cm}
 
 \underline{Résultats}\\
+\begin{center} \scalebox{0.5}{\includegraphics{image/total.png}} \end{center}
+\begin{center} \scalebox{0.5}{\includegraphics{image/Prim.png}} \end{center}
+\begin{center} \scalebox{0.5}{\includegraphics{image/Boruvka.png}} \end{center}
+\begin{center} \scalebox{0.5}{\includegraphics{image/Kruskal.png}} \end{center}
 
 \vspace{0.7cm}
 

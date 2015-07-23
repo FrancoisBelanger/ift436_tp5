@@ -8,7 +8,6 @@ import time
 import timeit
 
 import numpy as np
-import matplotlib.pyplot as plt
 
 from graph_generator import *
 from boruvka import *
@@ -16,21 +15,6 @@ from kruskal import *
 from prim import *
 
 nb_algo = 3
-
-
-def save_graph(timed, step_sizes):
-    # plt.plot(step_sizes, timed[0])
-    # plt.plot(step_sizes, timed[1])
-    for i in range(nb_algo):
-        plt.plot(step_sizes, timed[i])
-
-    plt.title(u"Temps d'execution en  fonction de la taille des donnee")
-    plt.ylabel("temp (sec.)")
-    plt.legend(['Boruvka', 'Kruskal', 'Prim'], loc='upper left')
-
-    print "step_sizes", step_sizes
-    print "timed", timed
-    plt.show()
 
 
 def parm():
@@ -57,7 +41,7 @@ def test(args):
     timed = np.zeros((nb_algo, len(step_sizes)))
 
     fct = [boruvka, kruskal, prim]
-    # TODO: iterate on the algo
+
     for algo_idx in range(nb_algo):
         np.random.set_state(random_state)
 
@@ -90,7 +74,6 @@ def test(args):
     np.save('data_'+stamp, timed)
     np.save('step_'+stamp, step_sizes)
 
-    save_graph(timed, step_sizes)
 
 if __name__ == "__main__":
     arg = parm()

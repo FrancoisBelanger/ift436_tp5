@@ -1,3 +1,7 @@
+__author__ = 'Francois Belanger 94 245 437' \
+             'Genevieve Dostie 12 078 306' \
+             'Jeremie Coulombe 13 061 991'
+
 import sys
 from heapq import heappop, heappush
 

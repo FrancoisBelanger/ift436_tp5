@@ -1,3 +1,7 @@
+__author__ = 'Francois Belanger 94 245 437' \
+             'Genevieve Dostie 12 078 306' \
+             'Jeremie Coulombe 13 061 991'
+
 from disjoint_set import DisjointSet
 
 # adapted from https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm)

@@ -8,42 +8,47 @@ import matplotlib.pyplot as plt
 nb_algo = 3
 algo = ['Boruvka', 'Kruskal', 'Prim']
 
+
 def plot_graph(x1, y1, x2, y2, idx):
-    plt.plot(y1, x1[idx])
-    plt.plot(y1, x1[idx])
-    plt.title("Temps d'execution de " + algo[idx] + " en fonction de la taille des donnee")
+    fig, ax = plt.subplots( nrows=1, ncols=1 )
+    ax.plot(y1, x1[idx])
+    ax.plot(y1, x1[idx])
+    plt.title("Temps d'execution de " + algo[idx])
     plt.ylabel("Temp (sec.)")
     plt.xlabel("Nombre de noeud dans le graph")
+    fig.savefig(algo[idx]+'.png')
+    plt.close(fig)
+
 
 def plot_bo(x1, y1, x2, y2):
     plot_graph(x1, y1, x2, y2, 0)
-    plt.show()
 
 
 def plot_kr(x1, y1, x2, y2):
     plot_graph(x1, y1, x2, y2, 1)
-    plt.show()
+
 
 def plot_pr(x1, y1, x2, y2):
-    plot_graph(x1, y1, x2, y2, 3)
-    plt.show()
+    plot_graph(x1, y1, x2, y2, 2)
 
 
 def plot_group_graph(timed, step_sizes):
     color = ['r', 'g', 'b']
+
     for i in range(nb_algo):
         plt.plot(step_sizes, timed[i], color[i])
-
-    plt.title("Temps d'execution en fonction de la taille des donnee")
-    plt.ylabel("Temp (sec.)")
-    plt.xlabel("Nombre de noeud dans le graph")
-    plt.legend(['Boruvka', 'Kruskal', 'Prim'], loc='upper left')
 
 
 def plot_total(x1, y1, x2, y2):
     plot_group_graph(x1, y1)
     plot_group_graph(x2, y2)
-    plt.show()
+
+    plt.title("Temps d'execution en fonction de la taille des donnees")
+    plt.ylabel("Temp (sec.)")
+    plt.xlabel("Nombre de noeud dans le graph")
+    plt.legend(['Boruvka', 'Kruskal', 'Prim'], loc='upper left')
+
+    plt.savefig('total.png')
 
 if __name__ == '__main__':
     x1 = np.load('data_100_20000_20_100.npy')

@@ -59,12 +59,10 @@
 %----------------------------------------------------------------------------------------
 \textbf{Introduction}\\
 Pour ce dernier travail pratique du cours, il était question d'effectuer une étude de performance de différents algorithmes s'attaquant au même problème. Les équipes étaient libres de choisir un problème de leur choix et de réunir un minimum de trois algorithmes différents pour résoudre celui-ci. Dans le cas présent, le calcul de l'arbre sous-tendant de coût minimal d'un graphe non-orienté connexe valué à été sélectionné. Trois algorithmes classiques -- ceux de Bor\r{u}vka, de  Krustal et de Prim -- ont été retenu pour l'étude. Ceux-ci ont été codés et exécutés avec Python.
-
 \vspace{0.3cm}
 
 Dans ce rapport seront présenté les algorithmes choisis, incluant les hypothèses concernant leurs complexités, les outils de travail utilisés, tant pour partager les sources que pour les développer, la conception du générateur d'échantillons aléatoires ainsi que les résultats de l'étude.
-
-\vspace{0.7cm}
+\vspace{0.45cm}
 
 %----------------------------------------------------------------------------------------
 %	Outil de travail
@@ -74,150 +72,125 @@ Pour ce travail, le langage choisi a été Python, sous sa version 2.7. Bien qu'il
 \vspace{0.3cm}
 
 Pour programmer en Python, l'environnement de développement choisi a été PyCharm 4.5.3. PyCharm comporte un outil Git qui a été utile pour le travail; en effet, le client web GitHub fut utilisé pour le partage des sources, la distribution de tâches et pour la consultation de l'historique des changements pour les cas de nécessité de retour en arrière.
-
-\vspace{0.7cm}
+\vspace{0.45cm}
 
 %----------------------------------------------------------------------------------------
 %	Nos algorithmes
 %----------------------------------------------------------------------------------------
 \textbf{Nos algorithmes}\\
 Le choix des algorithmes a été orienté par la liste des méthodes de calcul de l'arbre sous-tendant à coût minimal d'un graphe présentée en classe, ainsi que par la liste des propositions dans l'énoncé du travail pour le troisième algorithme. Les algorithmes développés par Bor\r{u}vka,  Krustal et Prim sont tous de stratégie gloutonne, mais ne partagent pas tout à fait les mêmes complexités algorithmiques.
-
 \vspace{0.3cm}
 
 L'algorithme de Bor\r{u}vka n'a pas été trouvé sur internet en langage Python, donc une version dérivée du pseudo-code présenté sur la page Wikipédia << Bor\r{u}vka algorithm >> a été programmée. L'algorithme de Kruskal a été tiré et adapté du dépôt GitHub de l'utilisateur << israelst >>, qui indique l'avoir adapté du livre << Algorithms >> de Dasgupta, Papadimitriou et Vazurani. Aucun algorithme efficace n'ayant été trouvé pour la méthode de Prim, une adaptation Python du pseudo-code présenté dans les notes du présent cours a été préconisée. Finalement, une classe représentant un ensemble d'ensembles disjoints a été créée pour unifier le fonctionnement des algorithmes de Bor\r{u}vka et de Krustal. Le code a été tiré des sources originales de l'algorithme de Kruskal trouvé sur internet. 
+\vspace{0.45cm}
 
-\vspace{0.7cm}
-
+%----------------------------------------------------------------------------------------
+%	Hypothèses
+%----------------------------------------------------------------------------------------
 \textbf{Hypothèses}\\
 La complexité des algorithmes devrait être les suivantes (pour un $m$ signifiant le nombre d'arêtes du graphe et $n$ le nombre de noeuds): $O(m\, log\, n)$ pour Bor\r{u}vka, $O(m\, log\, m)$ pour Kruskal et $O(m\, log\, n)$ pour Prim.
 Il est donc à comprendre qu'étant de même complexité, Bor\r{u}vka et Prim auront des courbes de temps d'exécution de comportement similaire. Pour ce qui est de Kruskal, il devrait être le moins performant des trois algorithmes, car son $log$ s'applique sur le nombre d'arêtes de non sur le nombre de noeuds.
-
-\vspace{0.7cm}
+\vspace{0.5cm}
 
 %----------------------------------------------------------------------------------------
-%	Générateur de graphe
+%	Générateur d'échantillons
 %----------------------------------------------------------------------------------------
-
 \textbf{Générateur d'échantillons}\\
 Cette dernière affirmation est vraie, puisque c'est que le générateur utilisé pour créer les ensembles de données de l'étude a été paramétré pour générer des graphes ayant exactement 10 fois plus d'arêtes que de noeuds. Il fonctionne de la façon suivante: on relie $n$ noeuds de façon linéaire par des arêtes de poids aléatoires entre 1 et 100 puis on génère des arêtes de même distribution de poids entre des paires noeuds non-reliés choisis aléatoirement jusqu'à atteindre un nombre d'arêtes égal à 10 fois le nombre de noeuds.
+\vspace{0.5cm}
 
-\vspace{0.7cm}
-
+%----------------------------------------------------------------------------------------
+%	Générateur de nombres aléatoires
+%----------------------------------------------------------------------------------------
 \textbf{Générateur de nombres aléatoires}\\
 Avant de rouler des tests exigeants, seul le générateur de nombre aléatoire de la librairie standard de Python était utilisée. Celui-ci est basé sur une implémentation en C du \textit{Marsenne Twister} \footnote{https://en.wikipedia.org/wiki/Mersenne\_Twister}, un algorithme avec une période de $2^{19937}-1$ fortement testé depuis plusieurs années. Le générateur de graphe utilisait la fonction \textit{randint} de Python, qui est une application de \textit{random}, qui utilise le \textit{Marsenne Twister}. À la suite d'un profilage des temps d'exécution  des tests, un ralentissement majeur a été relevé au niveau de la génération des données aléatoires. Ainsi, un changement vers la librarie  \textit{numpy} a été fait pour la plupart des fonctions de génération de nombres aléatoires. Une seule fonction de la librairie standard a été conservée dans << framework.py >> puisqu'elle n'avait pas d'équivalent dans la librairie \textit{numpy} ( << sample >>. qui se charge d'échantillonner le tableau des tailles de données possibles). Cette librairie externe se base aussi sur le \textit{Marsenne Twister}.
+\vspace{0.5cm}
 
-\vspace{0.7cm}
+%----------------------------------------------------------------------------------------
+%	Méthodologie
+%----------------------------------------------------------------------------------------
+\textbf{Méthodologie}\\
+Le script principal, <<framework.py>>, prends 4 paramètres en entrée:
+\begin{itemize}
+	\item \textbf{\textit{n}}: La taille minimum des données à générer (le nombre de noeuds du graphe)
+	\item \textbf{\textit{N}}: La taille maximum des données à générer
+	\item \textbf{\textit{s}}: Le nombre d'échantillon de tailles de donnés à tester entre $n$ et $N$ (on en choisi $s-2$ de façon aléatoire, car on inclus toujours $n$ et $N$ dans les tests)
+	\item \textbf{\textit{r}}: Le nombre de répétition des tests pour une taille donnée
+\end{itemize}
+\vspace{0.3cm}
+
+Ainsi, $ 3*s*r $ tests sont exécutés au total, soit un pour chaque répétition de chaque échantillon de données choisi entre $n$ et $N$ pour chacun des trois algorithmes.
+\vspace{0.3cm}
+
+Une session de test se déroule ainsi:
+\begin{enumerate}[label=\arabic*)]
+	\item Initialiser le germe du générateur de nombres aléatoires
+	\item Sauvegarder l'état du générateur aléatoire
+	\item Choisir aléatoirement $s-2$ tailles des données à tester entre $n$ et $N$, exclus
+	\item Pour chaque algorithme
+		\begin{enumerate}
+			\item Charger l'état du générateur
+			\item Pour chaque taille de données
+				\begin{enumerate}
+					\item Prendre une mesure du temps de départ
+					\item Pour chaque répétition du test ($r$ fois)
+						\begin{enumerate}
+							\item Générer un graphe de la bonne taille
+							\item Exécuter l'algorithme
+						\end{enumerate}
+					\item Prendre la mesure du temps total d'exécution pour cette taille de donnée pour cet algorithme
+				\end{enumerate}
+		\end{enumerate}
+	\item Charger l'état du générateur
+	\item Pour chaque taille de données
+		\begin{enumerate}
+			\item Prendre une mesure du temps de départ
+			\item Pour chaque répétition du test
+				\begin{enumerate}
+					\item Générer un graphe de la bonne taille
+				\end{enumerate}
+			\item Prendre la mesure du temps total d'exécution pour cette taille de donnée
+			\item Pour chaque algorithme
+				\begin{enumerate}
+					\item Soustraire ce temps du temps d'exécution officiel
+				\end{enumerate}
+		\end{enumerate}
+	\item Diviser tous les temps d'exécution par le nombre de répétition des tests
+	\item Sauvegarder les données sur disque
+\end{enumerate}
+\vspace{0.3cm}
+
+Pour recueillir les données sur le temps d'exécution versus le nombre de sommets des graphes, la librairie \textit{matplotlib} a été importée. Celle-ci permet de tracer des courbes à partir des données brutes recueillies, évitant ainsi la nécessité d'une compilation des résultats dans un fichier pour ensuite produire des graphiques avec un logiciel externe comme Excel.
+\vspace{0.5cm}
 
 %----------------------------------------------------------------------------------------
 %	Résultats
 %----------------------------------------------------------------------------------------
-
-\textbf{Méthodologie}\\
-Le script principal, <<framework.py>>, prends 4 paramètres en entrée:
-
-\begin{itemize}
-\item
-\textbf{$n$}: La taille minimum des données à générer (le nombre de noeuds du graphe)
-\item
-\textbf{$N$}: La taille maximum des données à générer
-\item
-\textbf{$s$}: Le nombre d'échantillon de tailles de donnés à tester entre $n$ et $N$ (on en choisi $s-2$ de façon aléatoire, car on inclus toujours $n$ et $N$ dans les tests)
-\item
-\textbf{$r$}: Le nombre de répétition des tests pour une taille donnée
-\end{itemize}
-
-\vspace{0.3cm}
-
-Ainsi, $ 3*s*r $ tests sont exécutés au total, soit un pour chaque répétition de chaque échantillon de données choisi entre $n$ et $N$ pour chacun des trois algorithmes.
-
-\vspace{0.3cm}
-
-Une session de test se déroule ainsi:
-
-\begin{enumerate}
-\item
-Initialiser le germe du générateur de nombres aléatoires
-\item
-Sauvegarder l'état du générateur aléatoire
-\item
-Choisir aléatoirement $s-2$ tailles des données à tester entre $n$ et $N$, exclus
-\item
-Pour chaque algorithme
-	\begin{enumerate}
-		\item
-		Charger l'état du générateur
-		\item
-		Pour chaque taille de données
-			\begin{enumerate}
-			\item
-			Prendre une mesure du temps de départ
-			\item
-			Pour chaque répétition du test ($r$ fois)
-				\begin{enumerate}
-				\item
-				Générer un graphe de la bonne taille
-				\item
-				Exécuter l'algorithme
-				\end{enumerate}
-			\item
-			Prendre la mesure du temps total d'exécution pour cette taille de donnée pour cet algorithme
-			\end{enumerate}
-	\end{enumerate}
-\item
-Charger l'état du générateur
-\item
-Pour chaque taille de données
-	\begin{enumerate}
-	\item
-	Prendre une mesure du temps de départ
-	\item
-	Pour chaque répétition du test
-		\begin{enumerate}
-		\item
-		Générer un graphe de la bonne taille
-		\end{enumerate}
-	\item
-	Prendre la mesure du temps total d'exécution pour cette taille de donnée
-	\item
-	Pour chaque algorithme
-		\begin{enumerate}
-		\item
-		Soustraire ce temps du temps d'exécution officiel
-		\end{enumerate}
-	\end{enumerate}
-\item
-Diviser tous les temps d'exécution par le nombre de répétition des tests
-Sauvegarder les données sur disque
-\end{enumerate}
-
-\vspace{0.3cm}
-
-Pour recueillir les données sur le temps d'exécution versus le nombre de sommets des graphes, la librairie \textit{matplotlib} a été importée. Celle-ci permet de tracer des courbes à partir des données brutes recueillies, évitant ainsi la nécessité d'une compilation des résultats dans un fichier pour ensuite produire des graphiques avec un logiciel externe comme Excel.
-
-\vspace{0.7cm}
-
 \textbf{Résultats}\\
-
 Les résultats de deux sessions de tests ont été compilé et jumelés dans les mêmes graphiques:
-\begin{itemize}
-\item
-\texttt{$python framework.py -n 100 -N 20000 -s 20 -r 100$}: Le graphe de taille minimal avait 100 noeuds, le max en avait 20000, et 18 autres tailles ont été choisies aléatoirement. Pour chaque taille, 100 graphes différents ont été testé et les résultats moyens se retrouvent dans les courbes.
-\item
-\texttt{$python framework.py -n 100 -N 30000 -s 25 -r 100$}: La taille maximale des graphes a été étendue à 30000, et 5 échantillons supplémentaires ont été ajoutés.
-\end{itemize}
+	\begin{itemize}
+		\item \texttt{$python framework.py -n 100 -N 20000 -s 20 -r 100$}: Le graphe de taille minimal avait 100 noeuds, le max en avait 20000, et 18 autres tailles ont été choisies aléatoirement. Pour chaque taille, 100 graphes différents ont été testé et les résultats moyens se retrouvent dans les courbes.
+		\item \texttt{$python framework.py -n 100 -N 30000 -s 25 -r 100$}: La taille maximale des graphes a été étendue à 30000, et 5 échantillons supplémentaires ont été ajoutés.
+	\end{itemize}
 
-\begin{center} \scalebox{0.5}{\includegraphics{image/total.png}} \end{center}
-\begin{center} \scalebox{0.5}{\includegraphics{image/Prim.png}} \end{center}
-\begin{center} \scalebox{0.5}{\includegraphics{image/Boruvka.png}} \end{center}
-\begin{center} \scalebox{0.5}{\includegraphics{image/Kruskal.png}} \end{center}
+\begin{center} \scalebox{0.9}{\includegraphics{image/total.png}} \end{center}
 
-\vspace{0.7cm}
+\begin{center}
+	\begin{tabular}{cc}
+		\scalebox{0.65}{\includegraphics{image/Prim.png}} &
+		\scalebox{0.65}{\includegraphics{image/Boruvka.png}}
+	\end{tabular}
+\end{center}
 
+\begin{center} \scalebox{0.65}{\includegraphics{image/Kruskal.png}} \end{center}
+
+\vspace{0.5cm}
+
+%----------------------------------------------------------------------------------------
+%	Analyse des résultats
+%----------------------------------------------------------------------------------------
 \textbf{Analyse des résultats}\\
-
 La première chose qui saute aux yeux en voyant ces courbes est la grande variabilité du temps d'exécution de l'algorithme de Bor\r{u}vka. En effet, même si 100 tests différents sont exécuté pour chaque point de la courbe, un aspect irrégulier se manifeste a partir des graphes de tailles 12000 environ. De plus, les résultats pour les deux sessions de tests sont relativement différentes pour ce même algorithme de  Bor\r{u}vka, alors que pour les autres les courbes sont lisses comme on pourrait s'y attendre. Cela peut être expliqué en partie par le fait que son implémentation diffère assez du pseudo-code original et qu'il pourrait y avoir quelques optimisations possibles. Il reste qu'en général cet algorithme prends relativement plus de temps que les autres.
-
 \vspace{0.3cm}
 
 Les hypothèses évoquées précédemment semble être confirmées par les résultats obtenus. Les trois courbes affichent une progression d'ordre $ nlogn $.  Il était annoncé que Kruskal ait une plus forte pente que Prim, ce qui semble être le cas; une amélioration qui aurait pu être fait aurait été de tester des données d'encores plus grand taille pour voir les tendances à plus long terme pour justifier cette affirmation. 
